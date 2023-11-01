@@ -7,8 +7,8 @@ const name = ref('')
 const input_content = ref('')
 const input_category = ref(null)
 
-const todos_asc = computed(() => todos.value.sort((a,b) =>{
-	return a.createdAt - b.createdAt
+const todos_asc = computed(() => todos.value.sort((a, b) => {
+	return b.createdAt - a.createdAt
 }))
 
 watch(name, (newVal) => {
@@ -22,17 +22,20 @@ watch(todos, (newVal) => {
 })
 
 const addTodo = () => {
-	if (input_content.value.trim() === '' || input_category.value === null) {
-		return
-	}
+    if (input_content.value.trim() === '' || input_category.value === null) {
+      return
+    }
 
-	todos.value.push({
-		content: input_content.value,
-		category: input_category.value,
-		done: false,
-		editable: false,
-		createdAt: new Date().getTime()
-	})
+    todos.value.push({
+      content: input_content.value,
+      category: input_category.value,
+      done: false,
+      editable: false,
+      createdAt: new Date().getTime()
+    })
+
+    input_content.value = ''
+    input_category.value = null
 }
 
 const removeTodo = (todo) => {
